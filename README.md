@@ -103,3 +103,20 @@ We will be able to provide proper translations for all components and will, once
 The `intergrations.html` file has a small overiew of the elements that are needed to create this functionallity.
 
 If you have any questions, feel free to contact me at <it@oppo-benelux.com>
+
+
+#### Legal
+For this to work Shopify adds the following cookies, but on our (oppo-nederland.store) domain to which we already send data.
+
+The following cookies are added:
+```
+_shopify_essential
+_shopify_y
+_tracking_consent
+_y
+cart
+cart_currency
+localization
+shop_pay_accelerated
+skip_shop_pay
+```
