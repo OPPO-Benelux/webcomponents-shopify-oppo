@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .product-modal__buy-button {
+            background: #2cff73;
+            color: #000000f2;
+            border-radius: 36px;
+            padding: 7px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            width: 100%;
+            border: none;
+        }
+
+        .product-modal__buy-button:disabled {
+            opacity: 0.3;
+        }
+
+        .product-modal__buy-button:hover {
+            cursor: pointer;
+        }
+
+        .open-cart-button {
+            background: #007bff;
+            color: white;
+            border-radius: 36px;
+            padding: 7px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .open-cart-button:hover {
+            background: #0056b3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+    <!-- Provide the token and set the market context -->
+    <shopify-store store-domain="oppo-nederland.store" country="NL" language="nl"></shopify-store>
+
+    <div class="product-layout">
+        <div class="product-card">
+            <!-- Set product you want to display -->
+            <shopify-context type="product" handle="oppo-a5x">
+                <template>
+                    <button class="product-modal__buy-button"
+                        onclick="document.querySelector('shopify-store').buyNow(event)"
+                        shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale">
+                        Koop nu
+                    </button>
+                    <button class="product-modal__add-button"
+                        onclick="getElementById('cart').addLine(event).showModal();"
+                        shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale">
+                        Toevoegen aan winkelwagen
+                    </button>
+                </template>
+            </shopify-context>
+        </div>
+    </div>
+
+
+    <div>
+
+        <button class="open-cart-button" onclick="getElementById('cart').showModal();">
+            Open cart
+        </button>
+
+        <shopify-cart id="cart">
+            <!-- Override the empty state with translated text-->
+            <div slot="header"><span class="your_custom_class_to_target_the_header">Winkelwagen</span></div>
+            <div slot="empty">Je winkelwagen is leeg</div>
+            <!-- Override the checkout button with translated text -->
+            <div slot="checkout-button">Naar de winkelwagen</div>
+            <!-- Override the apply discount button with translated text -->
+            <div slot="apply-discount-button">Korting toevoegen</div>
+            <!-- Override the discounts section title with translated text -->
+            <div slot="discounts-title">Korting</div>
+            <!-- The extension is appended to the cart. -->
+            <div slot="extension" class="cart-extension">
+                <p class="cart-extension__title">You may also like</p>
+                <shopify-context type="collection" handle="korting-accessoires">
+                    <template>
+                        <div class="cart-extension__products">
+                            <!-- The collection is iterated over and the products are displayed. -->
+                            <shopify-list-context type="product" query="collection.products" first="3">
+                                <template>
+                                    <button class="cart-extension__product"
+                                        onclick="document.querySelector('shopify-cart').addLine(event);"
+                                        shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale">
+                                        <shopify-media width="135" height="135"
+                                            query="product.featuredImage"></shopify-media>
+                                        <p><span>+</span></p>
+                                    </button>
+                                </template>
+                            </shopify-list-context>
+                        </div>
+                    </template>
+                </shopify-context>
+            </div>
+        </shopify-cart>
+    </div>
+</body>
+
+</html>
