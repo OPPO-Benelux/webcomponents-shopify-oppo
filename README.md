@@ -102,4 +102,4 @@ We will be able to provide proper translations for all components and will, once
 
 The `intergrations.html` file has a small overiew of the elements that are needed to create this functionallity.
 
-If you have any questions, feel free to contact me at <thom.knepper@oppo-aed.nl>
+If you have any questions, feel free to contact me at <it@oppo-benelux.com>
